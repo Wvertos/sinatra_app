@@ -25,6 +25,15 @@ get '/results' do
   erb :results
 end
 
+post "/reset" do
+  @title = "Your results are gone"
+  @store = YAML::Store.new 'votes.yml'
+  @store.transaction do
+    @store['votes'].clear
+  end
+  erb :reset
+end
+
 Choices = {
   'HAM' => 'Hamburger',
   'PIZ' => 'Pizza',
