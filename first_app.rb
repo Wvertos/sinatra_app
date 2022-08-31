@@ -31,7 +31,8 @@ post "/reset" do
   @store.transaction do
     @store['votes'].clear
   end
-  erb :reset
+  @votes = @store.transaction { @store['votes'] }
+  erb :results
 end
 
 Choices = {
